@@ -9,38 +9,217 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as DesignersRouteImport } from './routes/designers'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CollectionsRouteImport } from './routes/collections'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as DesignersDesignerIdRouteImport } from './routes/designers.$designerId'
+import { Route as DashboardProfileRouteImport } from './routes/dashboard/profile'
+import { Route as DashboardOrdersRouteImport } from './routes/dashboard/orders'
+import { Route as DashboardMyCollectionsRouteImport } from './routes/dashboard/my-collections'
+import { Route as DashboardCartRouteImport } from './routes/dashboard/cart'
+import { Route as CollectionsCollectionIdRouteImport } from './routes/collections.$collectionId'
+import { Route as DashboardMyCollectionsNewRouteImport } from './routes/dashboard/my-collections.new'
 
+const DesignersRoute = DesignersRouteImport.update({
+  id: '/designers',
+  path: '/designers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsRoute = CollectionsRouteImport.update({
+  id: '/collections',
+  path: '/collections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DesignersDesignerIdRoute = DesignersDesignerIdRouteImport.update({
+  id: '/$designerId',
+  path: '/$designerId',
+  getParentRoute: () => DesignersRoute,
+} as any)
+const DashboardProfileRoute = DashboardProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardOrdersRoute = DashboardOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardMyCollectionsRoute = DashboardMyCollectionsRouteImport.update({
+  id: '/my-collections',
+  path: '/my-collections',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardCartRoute = DashboardCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const CollectionsCollectionIdRoute = CollectionsCollectionIdRouteImport.update({
+  id: '/$collectionId',
+  path: '/$collectionId',
+  getParentRoute: () => CollectionsRoute,
+} as any)
+const DashboardMyCollectionsNewRoute =
+  DashboardMyCollectionsNewRouteImport.update({
+    id: '/new',
+    path: '/new',
+    getParentRoute: () => DashboardMyCollectionsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/collections': typeof CollectionsRouteWithChildren
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/designers': typeof DesignersRouteWithChildren
+  '/collections/$collectionId': typeof CollectionsCollectionIdRoute
+  '/dashboard/cart': typeof DashboardCartRoute
+  '/dashboard/my-collections': typeof DashboardMyCollectionsRouteWithChildren
+  '/dashboard/orders': typeof DashboardOrdersRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/designers/$designerId': typeof DesignersDesignerIdRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/my-collections/new': typeof DashboardMyCollectionsNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/collections': typeof CollectionsRouteWithChildren
+  '/designers': typeof DesignersRouteWithChildren
+  '/collections/$collectionId': typeof CollectionsCollectionIdRoute
+  '/dashboard/cart': typeof DashboardCartRoute
+  '/dashboard/my-collections': typeof DashboardMyCollectionsRouteWithChildren
+  '/dashboard/orders': typeof DashboardOrdersRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/designers/$designerId': typeof DesignersDesignerIdRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/my-collections/new': typeof DashboardMyCollectionsNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/collections': typeof CollectionsRouteWithChildren
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/designers': typeof DesignersRouteWithChildren
+  '/collections/$collectionId': typeof CollectionsCollectionIdRoute
+  '/dashboard/cart': typeof DashboardCartRoute
+  '/dashboard/my-collections': typeof DashboardMyCollectionsRouteWithChildren
+  '/dashboard/orders': typeof DashboardOrdersRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/designers/$designerId': typeof DesignersDesignerIdRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/my-collections/new': typeof DashboardMyCollectionsNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/collections'
+    | '/dashboard'
+    | '/designers'
+    | '/collections/$collectionId'
+    | '/dashboard/cart'
+    | '/dashboard/my-collections'
+    | '/dashboard/orders'
+    | '/dashboard/profile'
+    | '/designers/$designerId'
+    | '/dashboard/'
+    | '/dashboard/my-collections/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/collections'
+    | '/designers'
+    | '/collections/$collectionId'
+    | '/dashboard/cart'
+    | '/dashboard/my-collections'
+    | '/dashboard/orders'
+    | '/dashboard/profile'
+    | '/designers/$designerId'
+    | '/dashboard'
+    | '/dashboard/my-collections/new'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/collections'
+    | '/dashboard'
+    | '/designers'
+    | '/collections/$collectionId'
+    | '/dashboard/cart'
+    | '/dashboard/my-collections'
+    | '/dashboard/orders'
+    | '/dashboard/profile'
+    | '/designers/$designerId'
+    | '/dashboard/'
+    | '/dashboard/my-collections/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  CollectionsRoute: typeof CollectionsRouteWithChildren
+  DashboardRoute: typeof DashboardRouteWithChildren
+  DesignersRoute: typeof DesignersRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/designers': {
+      id: '/designers'
+      path: '/designers'
+      fullPath: '/designers'
+      preLoaderRoute: typeof DesignersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections': {
+      id: '/collections'
+      path: '/collections'
+      fullPath: '/collections'
+      preLoaderRoute: typeof CollectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +227,129 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/designers/$designerId': {
+      id: '/designers/$designerId'
+      path: '/$designerId'
+      fullPath: '/designers/$designerId'
+      preLoaderRoute: typeof DesignersDesignerIdRouteImport
+      parentRoute: typeof DesignersRoute
+    }
+    '/dashboard/profile': {
+      id: '/dashboard/profile'
+      path: '/profile'
+      fullPath: '/dashboard/profile'
+      preLoaderRoute: typeof DashboardProfileRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/orders': {
+      id: '/dashboard/orders'
+      path: '/orders'
+      fullPath: '/dashboard/orders'
+      preLoaderRoute: typeof DashboardOrdersRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/my-collections': {
+      id: '/dashboard/my-collections'
+      path: '/my-collections'
+      fullPath: '/dashboard/my-collections'
+      preLoaderRoute: typeof DashboardMyCollectionsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/cart': {
+      id: '/dashboard/cart'
+      path: '/cart'
+      fullPath: '/dashboard/cart'
+      preLoaderRoute: typeof DashboardCartRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/collections/$collectionId': {
+      id: '/collections/$collectionId'
+      path: '/$collectionId'
+      fullPath: '/collections/$collectionId'
+      preLoaderRoute: typeof CollectionsCollectionIdRouteImport
+      parentRoute: typeof CollectionsRoute
+    }
+    '/dashboard/my-collections/new': {
+      id: '/dashboard/my-collections/new'
+      path: '/new'
+      fullPath: '/dashboard/my-collections/new'
+      preLoaderRoute: typeof DashboardMyCollectionsNewRouteImport
+      parentRoute: typeof DashboardMyCollectionsRoute
+    }
   }
 }
 
+interface CollectionsRouteChildren {
+  CollectionsCollectionIdRoute: typeof CollectionsCollectionIdRoute
+}
+
+const CollectionsRouteChildren: CollectionsRouteChildren = {
+  CollectionsCollectionIdRoute: CollectionsCollectionIdRoute,
+}
+
+const CollectionsRouteWithChildren = CollectionsRoute._addFileChildren(
+  CollectionsRouteChildren,
+)
+
+interface DashboardMyCollectionsRouteChildren {
+  DashboardMyCollectionsNewRoute: typeof DashboardMyCollectionsNewRoute
+}
+
+const DashboardMyCollectionsRouteChildren: DashboardMyCollectionsRouteChildren =
+  {
+    DashboardMyCollectionsNewRoute: DashboardMyCollectionsNewRoute,
+  }
+
+const DashboardMyCollectionsRouteWithChildren =
+  DashboardMyCollectionsRoute._addFileChildren(
+    DashboardMyCollectionsRouteChildren,
+  )
+
+interface DashboardRouteChildren {
+  DashboardCartRoute: typeof DashboardCartRoute
+  DashboardMyCollectionsRoute: typeof DashboardMyCollectionsRouteWithChildren
+  DashboardOrdersRoute: typeof DashboardOrdersRoute
+  DashboardProfileRoute: typeof DashboardProfileRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardCartRoute: DashboardCartRoute,
+  DashboardMyCollectionsRoute: DashboardMyCollectionsRouteWithChildren,
+  DashboardOrdersRoute: DashboardOrdersRoute,
+  DashboardProfileRoute: DashboardProfileRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
+interface DesignersRouteChildren {
+  DesignersDesignerIdRoute: typeof DesignersDesignerIdRoute
+}
+
+const DesignersRouteChildren: DesignersRouteChildren = {
+  DesignersDesignerIdRoute: DesignersDesignerIdRoute,
+}
+
+const DesignersRouteWithChildren = DesignersRoute._addFileChildren(
+  DesignersRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  CollectionsRoute: CollectionsRouteWithChildren,
+  DashboardRoute: DashboardRouteWithChildren,
+  DesignersRoute: DesignersRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

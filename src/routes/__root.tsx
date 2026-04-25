@@ -1,4 +1,18 @@
-import { Outlet, Link, createRootRoute } from "@tanstack/react-router";
+import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { AuthProvider } from "@/contexts/AuthContext";
+
+export const Route = createRootRoute({
+  component: RootComponent,
+  notFoundComponent: NotFoundComponent,
+});
+
+function RootComponent() {
+  return (
+    <AuthProvider>
+      <Outlet />
+    </AuthProvider>
+  );
+}
 
 function NotFoundComponent() {
   return (
@@ -10,23 +24,14 @@ function NotFoundComponent() {
           The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="mt-6">
-          <Link
-            to="/"
+          <a
+            href="/"
             className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Back to Atelier
-          </Link>
+          </a>
         </div>
       </div>
     </div>
   );
-}
-
-export const Route = createRootRoute({
-  component: RootComponent,
-  notFoundComponent: NotFoundComponent,
-});
-
-function RootComponent() {
-  return <Outlet />;
 }
